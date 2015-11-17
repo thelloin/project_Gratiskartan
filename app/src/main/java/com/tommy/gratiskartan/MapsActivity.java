@@ -7,7 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,6 +37,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(myToolbar);
 
         // Set a listener to the floating action bar
+        findViewById(R.id.fab_test).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FloatingActionButton b = (FloatingActionButton) findViewById(R.id.fab_test);
+                b.setIcon(R.drawable.ic_map);
+                Toast.makeText(MapsActivity.this, "Clicked the fab", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         // Testing to use GPSTracker

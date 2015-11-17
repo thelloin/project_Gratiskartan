@@ -28,7 +28,7 @@
         android:id="@+id/fab_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        map:fab_icon="@mipmap/ic_launcher"
+        map:fab_icon="@drawable/ic_list"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="16dp" />
 
