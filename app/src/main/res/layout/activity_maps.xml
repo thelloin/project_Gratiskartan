@@ -5,7 +5,33 @@
     android:layout_height="match_parent"
     android:id="@+id/map"
     tools:context=".MapsActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment" >
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    tools:layout="@layout/activity_maps">
+
+    <!--
+    <com.example.android.floatingactionbuttonbasic.FloatingActionButton
+        android:id="@+id/fab_1" />
+    -->
+
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_dialog_email" />
+    -->
+    <!--android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" -->
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        map:fab_icon="@mipmap/ic_launcher"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="16dp" />
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"

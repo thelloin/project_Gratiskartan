@@ -2,6 +2,7 @@ package com.tommy.gratiskartan;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+//import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -27,8 +28,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        // Add the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        // Set a listener to the floating action bar
+
 
         // Testing to use GPSTracker
         gps = new GPSTracker(MapsActivity.this);
