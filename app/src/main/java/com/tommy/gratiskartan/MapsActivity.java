@@ -1,5 +1,6 @@
 package com.tommy.gratiskartan;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import com.balysv.materialmenu.MaterialMenuDrawable;
+import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +33,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     // Variable to toggle fab icon
     private boolean toggleFab = true;
 
+    // Toggler on the Toolbar
+    private MaterialMenuIconToolbar materialMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +44,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Add the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+        // Add the toggler  to the Toolbar **********************
+        myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle your drawable state here
+                materialMenu.animateState(MaterialMenuDrawable.IconState.ARROW);
+            }
+        });
+        materialMenu = new MaterialMenuIconToolbar(this, Color.WHITE, MaterialMenuDrawable.Stroke.THIN) {
+            @Override
+            public int getToolbarViewId() {
+                return R.id.my_toolbar;
+            }
+        };
+        // ******************************************************
 
         // Set a listener to the floating action bar
         findViewById(R.id.fab_test).setOnClickListener(new View.OnClickListener() {
