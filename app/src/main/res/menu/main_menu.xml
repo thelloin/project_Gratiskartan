@@ -4,9 +4,15 @@
 
     <!-- Mark as favorite, should always appear if possible -->
     <item
-        android:id="@+id/action_favorite"
-        android:icon="@mipmap/ic_launcher"
-        android:title="Hej"
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/action_addItem"
+        android:icon="@drawable/ic_add_circle_outline"
+        android:title="Add"
         app:showAsAction="ifRoom"
         />
 

@@ -27,6 +27,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private double curLatitude = 0;
     private double curLongitude = 0;
 
+    // Variable to toggle fab icon
+    private boolean toggleFab = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +44,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 FloatingActionButton b = (FloatingActionButton) findViewById(R.id.fab_test);
-                b.setIcon(R.drawable.ic_map);
+                if (toggleFab) {
+                    b.setIcon(R.drawable.ic_map);
+                } else {
+                    b.setIcon(R.drawable.ic_list);
+                }
+                toggleFab = !toggleFab;
                 Toast.makeText(MapsActivity.this, "Clicked the fab", Toast.LENGTH_LONG).show();
             }
         });
