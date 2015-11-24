@@ -1,13 +1,16 @@
 package com.tommy.gratiskartan;
 
+//import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,7 +24,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
@@ -40,6 +43,18 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        // Testing to add GMapFragment at runtime
+        if (findViewById(R.id.fragment_container) != null) {
+            GMapFragment gMapFragment = GMapFragment.newInstance();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            gMapFragment.setArguments(getIntent().getExtras());
+
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, gMapFragment).commit();
+        }
 
         // Add the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -67,8 +82,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 FloatingActionButton b = (FloatingActionButton) findViewById(R.id.fab_test);
                 if (toggleFab) {
                     b.setIcon(R.drawable.ic_map);
+                    toggleFragment(!toggleFab);
                 } else {
                     b.setIcon(R.drawable.ic_list);
+                    toggleFragment(!toggleFab);
                 }
                 toggleFab = !toggleFab;
                 Toast.makeText(MapsActivity.this, "Clicked the fab", Toast.LENGTH_LONG).show();
@@ -77,19 +94,46 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         // Testing to use GPSTracker
+        /*
         gps = new GPSTracker(MapsActivity.this);
         if (gps.canGetLocation()) {
             curLatitude = gps.getLatitude();
             curLongitude = gps.getLongitude();
         } else {
             gps.showSettingsAlert();
-        }
+        }*/
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);*/
     }
+
+    /**
+     * private method to toggle list and map fragment
+     * @param showMap
+     * @return void
+     */
+    private void toggleFragment(boolean showMap) {
+        if (showMap) {
+            GMapFragment gmf = GMapFragment.newInstance();
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, gmf);
+            //ft.addToBackStack(null);
+            //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.commit();
+        } else {
+            ListFragment lf = ListFragment.newInstance();
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, lf);
+            //ft.addToBackStack(null);
+            //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            ft.commit();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -97,6 +141,26 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        Toast.makeText(MapsActivity.this, "Clicked a menuOption", Toast.LENGTH_SHORT).show();
+
+
+
+        //FragmentTransaction ft = getFragmentManager().beginTransaction();
+        //ft.replace(R.id.main_linear_layout,lf);
+        //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        //ft.commit();
+        /*ListFragment lf = ListFragment.newInstance();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.main_linear_layout,lf);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+        ft.commit();*/
+
+
+        return super.onOptionsItemSelected(menuItem);
     }
 
 
@@ -109,7 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    @Override
+    /*@Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
@@ -124,5 +188,5 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(soderkoping).title("Marker in Söderköping"));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(soderkoping));
-    }
+    }*/
 }
