@@ -2,7 +2,6 @@ package com.tommy.gratiskartan;
 
 //import android.app.FragmentTransaction;
 import android.graphics.Color;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
@@ -17,12 +16,7 @@ import android.widget.Toast;
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCallback {
 
@@ -124,7 +118,7 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
             //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.commit();
         } else {
-            ListFragment lf = ListFragment.newInstance();
+            ListItemsFragment lf = ListItemsFragment.newInstance();
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, lf);
@@ -153,7 +147,7 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
         //ft.replace(R.id.main_linear_layout,lf);
         //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         //ft.commit();
-        /*ListFragment lf = ListFragment.newInstance();
+        /*ListItemsFragment lf = ListItemsFragment.newInstance();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.main_linear_layout,lf);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
