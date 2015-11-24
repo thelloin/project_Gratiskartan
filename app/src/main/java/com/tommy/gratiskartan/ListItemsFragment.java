@@ -44,10 +44,13 @@ public class ListItemsFragment extends ListFragment {
         testText.setText("This should be seen on the screen");
 
         return linearLayout;*/
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 inflater.getContext(), android.R.layout.simple_list_item_1, list_test);
+        setListAdapter(adapter);*/
+
+        CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), MapsActivity.DUMMY_ARRAY_LIST);
         setListAdapter(adapter);
-        
+
         return super.onCreateView(inflater, container, savedInstanceState);
 
     }

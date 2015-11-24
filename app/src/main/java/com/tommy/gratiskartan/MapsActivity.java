@@ -18,6 +18,8 @@ import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.GoogleMap;
 
+import java.util.ArrayList;
+
 public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -32,6 +34,29 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
 
     // Toggler on the Toolbar
     private MaterialMenuIconToolbar materialMenu;
+
+    public static final Item[] DUMMY_ITEMS =
+            {
+                    new Item(58.39296355, 15.57187557, "Author1", "Category1", "Description1"),
+                    new Item(58.3941106, 15.57432175, "Author2", "Category2", "Description2"),
+                    new Item(58.3957299, 15.57960033, "Author3", "Category3", "Description3"),
+                    new Item(58.39730415, 15.57470798, "Author4", "Category4", "Description4"),
+                    new Item(58.39872091, 15.57397842, "Author5", "Category5", "Description5"),
+                    new Item(58.40157675, 15.57427883, "Author6", "Category6", "Description6"),
+                    new Item(58.40315074, 15.58011532, "Author7", "Category7", "Description7"),
+                    new Item(58.40389274, 15.57625294, "Author8", "Category8", "Description8")
+            };
+
+    public static final ArrayList<Item> DUMMY_ARRAY_LIST = new ArrayList<Item>() {{
+        add(new Item(58.39296355, 15.57187557, "Author1", "Category1", "Description1"));
+        add(new Item(58.3941106, 15.57432175, "Author2", "Category2", "Description2"));
+        add(new Item(58.3957299, 15.57960033, "Author3", "Category3", "Description3"));
+        add(new Item(58.39730415, 15.57470798, "Author4", "Category4", "Description4"));
+        add(new Item(58.39872091, 15.57397842, "Author5", "Category5", "Description5"));
+        add(new Item(58.40157675, 15.57427883, "Author6", "Category6", "Description6"));
+        add(new Item(58.40315074, 15.58011532, "Author7", "Category7", "Description7"));
+        add(new Item(58.40389274, 15.57625294, "Author8", "Category8", "Description8"));
+    }};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
