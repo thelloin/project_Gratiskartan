@@ -18,6 +18,7 @@ import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.Parse;
 import com.parse.ParseObject;
 
@@ -31,6 +32,12 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
 
     private double curLatitude = 0;
     private double curLongitude = 0;
+
+    // Used here for testing
+    public LatLng centerPos = null;
+    public void setCenterPos(LatLng cPos) {
+        centerPos = cPos;
+    }
 
     // Variable to toggle fab icon
     private boolean toggleFab = true;
@@ -76,6 +83,7 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, gMapFragment).commit();
+
         }
 
         // Add the toolbar
@@ -119,9 +127,15 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
         Parse.initialize(this, "3pWEzeHgdbgiES4KRdNmp56eoDTHcxhpXsCmAyP9", "JsGTeFwPQEquUqERwKng05XhmyDGsMsNMmHRd8hP");
 
         // Testing the Parse SDK
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
+        // Adding testObject
+        /*ParseObject testObject = new ParseObject("TestMarkers");
+        testObject.put("latitude", 58.3957299);
+        testObject.put("longitude", 15.57960033);
+        testObject.put("postedBy", "DummyUser3");
+        testObject.put("category", "category3");
+        testObject.put("description", "description3");
         testObject.saveInBackground();
+        */
 
         // Testing to use GPSTracker
         /*
@@ -142,7 +156,6 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
     /**
      * private method to toggle list and map fragment
      * @param showMap
-     * @return void
      */
     private void toggleFragment(boolean showMap) {
         if (showMap) {

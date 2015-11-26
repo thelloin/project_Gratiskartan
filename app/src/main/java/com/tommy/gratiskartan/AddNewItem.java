@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
+import com.google.android.gms.maps.model.LatLng;
 
 public class AddNewItem extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class AddNewItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Here we add the item to the database and return to main activity
+                saveItemToBD();
                 finish();
             }
         });
@@ -60,5 +62,9 @@ public class AddNewItem extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.add_item_menu, menu);
         return true;
+    }
+
+    private void saveItemToBD() {
+        //LatLng centerPos = get
     }
 }
