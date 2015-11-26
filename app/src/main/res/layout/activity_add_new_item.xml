@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tommy.gratiskartan.AddNewItem">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/add_item_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kategori"
+        android:id="@+id/tv_category"
+        android:layout_below="@+id/add_item_toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="33dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="84dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_category"
+        android:layout_below="@+id/tv_category"
+        android:layout_alignLeft="@+id/tv_category"
+        android:layout_alignStart="@+id/tv_category"
+        android:prompt="@string/category_prompt"
+        android:entries="@array/categories"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Beskrivning"
+        android:id="@+id/tv_description"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/spinner_category"
+        android:layout_alignStart="@+id/spinner_category" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:ems="10"
+        android:hint="Skriv in en beskrivning av objektet."
+        android:id="@+id/ed_description"
+        android:layout_below="@+id/tv_description"
+        android:layout_alignLeft="@+id/tv_description"
+        android:layout_alignStart="@+id/tv_description"
+        android:layout_marginRight="33dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lägg till"
+        android:id="@+id/btn_add_item"
+        android:layout_marginTop="54dp"
+        android:layout_below="@+id/ed_description"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
+
+<!-- android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" -->

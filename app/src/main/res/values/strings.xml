@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">Gratiskartan</string>
     <string name="title_activity_maps">Gratiskartan</string>
+
+    <string name="category_prompt">Välj en kategori</string>
+    
+    <string-array name="categories">
+        <item>Frukt</item>
+        <item>Bär</item>
+        <item>Elektronik</item>
+        <item>För Hemmet</item>
+        <item>Skrot</item>
+    </string-array>
 </resources>

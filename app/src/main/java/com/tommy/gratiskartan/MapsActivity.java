@@ -1,6 +1,7 @@
 package com.tommy.gratiskartan;
 
 //import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
@@ -17,6 +18,8 @@ import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.GoogleMap;
+import com.parse.Parse;
+import com.parse.ParseObject;
 
 import java.util.ArrayList;
 
@@ -111,6 +114,14 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
             }
         });
 
+        // Enable and initialize parse
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "3pWEzeHgdbgiES4KRdNmp56eoDTHcxhpXsCmAyP9", "JsGTeFwPQEquUqERwKng05XhmyDGsMsNMmHRd8hP");
+
+        // Testing the Parse SDK
+        ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();
 
         // Testing to use GPSTracker
         /*
@@ -164,8 +175,13 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        Toast.makeText(MapsActivity.this, "Clicked a menuOption", Toast.LENGTH_SHORT).show();
-
+        //Toast.makeText(MapsActivity.this, "Clicked a menuOption", Toast.LENGTH_SHORT).show();
+        int id = menuItem.getItemId();
+        if (id == R.id.action_addItem) {
+            Intent intent = new Intent(this, AddNewItem.class);
+            startActivity(intent);
+            return true;
+        }
 
 
         //FragmentTransaction ft = getFragmentManager().beginTransaction();
