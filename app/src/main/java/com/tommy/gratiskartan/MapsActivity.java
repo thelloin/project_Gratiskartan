@@ -24,7 +24,7 @@ import com.parse.ParseObject;
 
 import java.util.ArrayList;
 
-public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
 
     private GoogleMap mMap;
 
@@ -35,9 +35,9 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
 
     // Used here for testing
     public LatLng centerPos = null;
-    public void setCenterPos(LatLng cPos) {
-        centerPos = cPos;
-    }
+    public static String CUR_LATITUDE_POS = "curLatitude";
+    public static String CUR_LONGITUDE_POS = "cuLongitude";
+
 
     // Variable to toggle fab icon
     private boolean toggleFab = true;
@@ -192,6 +192,8 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
         int id = menuItem.getItemId();
         if (id == R.id.action_addItem) {
             Intent intent = new Intent(this, AddNewItem.class);
+            intent.putExtra(CUR_LATITUDE_POS, centerPos.latitude);
+            intent.putExtra(CUR_LONGITUDE_POS, centerPos.longitude);
             startActivity(intent);
             return true;
         }
@@ -209,6 +211,13 @@ public class MapsActivity extends AppCompatActivity { //implements OnMapReadyCal
 
 
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    // Temporary method for getting center pos of map
+    @Override
+    public void setCenterPos(LatLng centerPos) {
+        this.centerPos = centerPos;
+        //Toast.makeText(MapsActivity.this, "Callback from GMapFragment", Toast.LENGTH_LONG).show();
     }
 
 

@@ -1,8 +1,10 @@
 package com.tommy.gratiskartan;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewGroupCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +31,14 @@ import java.util.List;
  *
  */
 public class GMapFragment extends SupportMapFragment implements
-        GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, OnMapReadyCallback {
+        GoogleMap.OnMarkerClickListener, GoogleMap.OnMarkerDragListener, OnMapReadyCallback,
+        GoogleMap.OnCameraChangeListener {
 
     private GoogleMap mMap;
 
     protected List<ParseObject> markersTEST = null;
+
+    private OnFragmentInteractionListener mListener;
     /**
      * Use this factory method to create a new instance of
      * this fragment.
@@ -83,6 +88,9 @@ public class GMapFragment extends SupportMapFragment implements
     public void onMapReady(GoogleMap googleMap) {
         // Add some dummy markers
         mMap = googleMap;
+
+        // Test to set up mMap
+        setUpmMap();
 
         /*
         LatLng coords;
@@ -141,6 +149,18 @@ public class GMapFragment extends SupportMapFragment implements
     */
     }
 
+    private void setUpmMap() {
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+            @Override
+            public void onCameraChange(CameraPosition cameraPosition) {
+                //Toast.makeText(getActivity(), "Will this work???? " , Toast.LENGTH_LONG).show();
+                if (mListener != null) {
+                    mListener.setCenterPos(cameraPosition.target);
+                }
+            }
+        });
+    }
+
     @Override
     public void onMarkerDragStart(Marker marker) {
     }
@@ -154,11 +174,20 @@ public class GMapFragment extends SupportMapFragment implements
         //mMarkerPosition = marker.getPosition();
     }
 
-    //@Override
+    // For some reason this does not work, have to add this listener dirctly to mMap
+    @Override
     public void onCameraChange(CameraPosition position) {
-        // TODO How do you find setCenterPos??
+        Toast.makeText(getActivity(), "Callback for camera change" , Toast.LENGTH_LONG).show();
         //getActivity().setCenterPos(position.target);
+        if (mListener != null) {
+            mListener.setCenterPos(position.target);
+        }
     }
+
+    /*@Override
+    public void onMapLongClick(LatLng point) {
+        Toast.makeText(getActivity(), "Callback for long click on map" , Toast.LENGTH_LONG).show();
+    }*/
 
     // Get the position where the map is right now, used for testing when
     // a new marker is added to this position
@@ -169,4 +198,37 @@ public class GMapFragment extends SupportMapFragment implements
         return centerPos;
     }
     */
+
+    //private void setCenterPos(LatLng centerPos) {
+
+    //}
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnFragmentInteractionListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+            + "must implement OnFragmentInteractionListener");
+        }
+
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment tot allow an interaction in this fragment to be communicated
+     * to the activity.
+     */
+    public interface OnFragmentInteractionListener {
+        public void setCenterPos(LatLng centerPos);
+    }
+
 }
