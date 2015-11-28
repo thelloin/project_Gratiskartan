@@ -108,7 +108,7 @@ public class GMapFragment extends SupportMapFragment implements
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e == null) {
-                    Toast.makeText(getActivity(), "Probably works " , Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), "Probably works " , Toast.LENGTH_LONG).show();
                     markersTEST = objects;
                     LatLng coord;
                     for(ParseObject marker : markersTEST) {
@@ -116,6 +116,10 @@ public class GMapFragment extends SupportMapFragment implements
                         mMap.addMarker(new MarkerOptions()
                             .position(coord)
                             .title(marker.getString("postedBy")));
+                    }
+                    // Send over the markers to the parent activity
+                    if (mListener != null) {
+                        mListener.setMarkers(markersTEST);
                     }
                 } else {
                     Toast.makeText(getActivity(), "Something went terribly wrong " , Toast.LENGTH_LONG).show();
@@ -155,6 +159,7 @@ public class GMapFragment extends SupportMapFragment implements
             public void onCameraChange(CameraPosition cameraPosition) {
                 //Toast.makeText(getActivity(), "Will this work???? " , Toast.LENGTH_LONG).show();
                 if (mListener != null) {
+                    // Send over the center position of the map
                     mListener.setCenterPos(cameraPosition.target);
                 }
             }
@@ -181,6 +186,7 @@ public class GMapFragment extends SupportMapFragment implements
         //getActivity().setCenterPos(position.target);
         if (mListener != null) {
             mListener.setCenterPos(position.target);
+
         }
     }
 
@@ -229,6 +235,7 @@ public class GMapFragment extends SupportMapFragment implements
      */
     public interface OnFragmentInteractionListener {
         public void setCenterPos(LatLng centerPos);
+        public void setMarkers(List<ParseObject> markers);
     }
 
 }

@@ -23,6 +23,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
 
@@ -37,6 +38,8 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     public LatLng centerPos = null;
     public static String CUR_LATITUDE_POS = "curLatitude";
     public static String CUR_LONGITUDE_POS = "cuLongitude";
+
+    private List<ParseObject> markers = null;
 
 
     // Variable to toggle fab icon
@@ -73,6 +76,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+        /*
         // Testing to add GMapFragment at runtime
         if (findViewById(R.id.fragment_container) != null) {
             GMapFragment gMapFragment = GMapFragment.newInstance();
@@ -84,7 +88,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, gMapFragment).commit();
 
-        }
+        }*/
 
         // Add the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -122,9 +126,12 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             }
         });
 
+
         // Enable and initialize parse
         Parse.enableLocalDatastore(this);
         Parse.initialize(this, "3pWEzeHgdbgiES4KRdNmp56eoDTHcxhpXsCmAyP9", "JsGTeFwPQEquUqERwKng05XhmyDGsMsNMmHRd8hP");
+
+
 
         // Testing the Parse SDK
         // Adding testObject
@@ -168,13 +175,47 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             ft.commit();
         } else {
             ListItemsFragment lf = ListItemsFragment.newInstance();
+            // TODO Add bundle to lf, add ArrayList<Item> to bundle, Item need to implement parceble
+            Bundle data = new Bundle();
+            ArrayList<Item> TEMPItemArrayList = new ArrayList<Item>();
+            for(ParseObject p : markers) {
+                TEMPItemArrayList.add(new Item(p.getDouble("latitude"),
+                        p.getDouble("longitude"),
+                        p.getString("postedBy"),
+                        p.getString("category"),
+                        p.getString("description")));
+            }
+            data.putParcelableArrayList("markers", TEMPItemArrayList);
+            lf.setArguments(data);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
             ft.replace(R.id.fragment_container, lf);
             //ft.addToBackStack(null);
             //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             ft.commit();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Toast.makeText(MapsActivity.this, "MapsActivity:onResume", Toast.LENGTH_LONG).show();
+
+
+        // Testing to add GMapFragment at runtime
+        if (findViewById(R.id.fragment_container) != null) {
+            GMapFragment gMapFragment = GMapFragment.newInstance();
+
+            // In case this activity was started with special instructions from an
+            // Intent, pass the Intent's extras to the fragment as arguments
+            gMapFragment.setArguments(getIntent().getExtras());
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, gMapFragment).commit();
+
+        }
+
     }
 
 
@@ -218,6 +259,11 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     public void setCenterPos(LatLng centerPos) {
         this.centerPos = centerPos;
         //Toast.makeText(MapsActivity.this, "Callback from GMapFragment", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setMarkers(List<ParseObject> markers) {
+        this.markers = markers;
     }
 
 

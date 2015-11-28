@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * Created by tommy on 11/23/15.
  */
@@ -47,8 +49,12 @@ public class ListItemsFragment extends ListFragment {
         /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 inflater.getContext(), android.R.layout.simple_list_item_1, list_test);
         setListAdapter(adapter);*/
+        Bundle extras = getArguments();
+        ArrayList<Item> markersTest = extras.getParcelableArrayList("markers");
 
-        CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), MapsActivity.DUMMY_ARRAY_LIST);
+
+        //CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), MapsActivity.DUMMY_ARRAY_LIST);
+        CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), markersTest);
         setListAdapter(adapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);
