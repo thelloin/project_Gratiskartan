@@ -1,6 +1,7 @@
 package com.tommy.gratiskartan;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewGroupCompat;
@@ -23,6 +24,7 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +39,8 @@ public class GMapFragment extends SupportMapFragment implements
     private GoogleMap mMap;
 
     protected List<ParseObject> markersTEST = null;
+
+    private ArrayList<Item> itemArrayList = null;
 
     private OnFragmentInteractionListener mListener;
     /**
@@ -110,16 +114,24 @@ public class GMapFragment extends SupportMapFragment implements
                 if (e == null) {
                     //Toast.makeText(getActivity(), "Probably works " , Toast.LENGTH_LONG).show();
                     markersTEST = objects;
+                    itemArrayList = getItemsFromParseObject(objects);
                     LatLng coord;
-                    for(ParseObject marker : markersTEST) {
+                    /*for(ParseObject marker : markersTEST) {
                         coord = new LatLng(marker.getDouble("latitude"), marker.getDouble("longitude"));
                         mMap.addMarker(new MarkerOptions()
                             .position(coord)
                             .title(marker.getString("postedBy")));
+                    }*/
+                    for(Item item: itemArrayList) {
+                        coord = new LatLng(item.latitude, item.longitude);
+                        mMap.addMarker(new MarkerOptions()
+                            .position(coord)
+                            .title(item.category)
+                            .snippet(item.author + " " + item.description));
                     }
                     // Send over the markers to the parent activity
                     if (mListener != null) {
-                        mListener.setMarkers(markersTEST);
+                        mListener.setMarkers(itemArrayList);
                     }
                 } else {
                     Toast.makeText(getActivity(), "Something went terribly wrong " , Toast.LENGTH_LONG).show();
@@ -153,6 +165,22 @@ public class GMapFragment extends SupportMapFragment implements
     */
     }
 
+    private ArrayList<Item> getItemsFromParseObject(List<ParseObject> objects) {
+        ArrayList<Item> items = new ArrayList<Item>();
+
+        for(ParseObject object : objects) {
+            double latitude = object.getDouble("latitude");
+            double longitude = object.getDouble("longitude");
+            String postedBy = object.getString("postedBy");
+            String category = object.getString("category");
+            String description = object.getString("description");
+            Item item = new Item(latitude, longitude, postedBy, category, description);
+            items.add(item);
+        }
+
+        return items;
+    }
+
     private void setUpmMap() {
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
@@ -161,6 +189,32 @@ public class GMapFragment extends SupportMapFragment implements
                 if (mListener != null) {
                     // Send over the center position of the map
                     mListener.setCenterPos(cameraPosition.target);
+                }
+            }
+        });
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                //Toast.makeText(getActivity(), "Clicked on info marker, id: " + marker.getId() , Toast.LENGTH_LONG).show();
+                // Find out what info window is clicked and open a new InfoItem activity
+                String title = marker.getTitle();
+                String snippet = marker.getSnippet();
+                //String postedBy = snippet.substring(0, snippet.indexOf(' '));
+                //String description = snippet.substring(snippet.indexOf(' ') + 1);
+                String[] postedByAndDesc = snippet.split(" ", 2);
+                //  + " desc: " + postedByAndDesc[1]
+                Toast.makeText(getActivity(), "Title: " + title + " author: " + postedByAndDesc[0]  + " desc: " + postedByAndDesc[1], Toast.LENGTH_LONG).show();
+                for (Item item : itemArrayList) {
+                    if (item.category.equals(title) && item.author.equals(postedByAndDesc[0])
+                            && item.description.equals(postedByAndDesc[1]) ) {
+
+                        // We have found the item
+                        // Start InfoActivity and add item
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), ItemInfo.class);
+                        intent.putExtra("item", item);
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -235,7 +289,7 @@ public class GMapFragment extends SupportMapFragment implements
      */
     public interface OnFragmentInteractionListener {
         public void setCenterPos(LatLng centerPos);
-        public void setMarkers(List<ParseObject> markers);
+        public void setMarkers(ArrayList<Item> markers);
     }
 
 }

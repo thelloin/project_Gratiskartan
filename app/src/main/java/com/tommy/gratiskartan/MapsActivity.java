@@ -39,7 +39,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     public static String CUR_LATITUDE_POS = "curLatitude";
     public static String CUR_LONGITUDE_POS = "cuLongitude";
 
-    private List<ParseObject> markers = null;
+    private ArrayList<Item> markers = null;
 
 
     // Variable to toggle fab icon
@@ -178,14 +178,14 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             // TODO Add bundle to lf, add ArrayList<Item> to bundle, Item need to implement parceble
             Bundle data = new Bundle();
             ArrayList<Item> TEMPItemArrayList = new ArrayList<Item>();
-            for(ParseObject p : markers) {
+            /*for(ParseObject p : markers) {
                 TEMPItemArrayList.add(new Item(p.getDouble("latitude"),
                         p.getDouble("longitude"),
                         p.getString("postedBy"),
                         p.getString("category"),
                         p.getString("description")));
-            }
-            data.putParcelableArrayList("markers", TEMPItemArrayList);
+            }*/
+            data.putParcelableArrayList("markers", markers);
             lf.setArguments(data);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -262,7 +262,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     }
 
     @Override
-    public void setMarkers(List<ParseObject> markers) {
+    public void setMarkers(ArrayList<Item> markers) {
         this.markers = markers;
     }
 

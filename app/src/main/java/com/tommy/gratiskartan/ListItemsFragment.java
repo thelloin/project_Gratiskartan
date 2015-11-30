@@ -1,6 +1,7 @@
 package com.tommy.gratiskartan;
 
 //import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,8 @@ import java.util.ArrayList;
 public class ListItemsFragment extends ListFragment {
 
     String[] list_test = new String[] {"one", "two", "three", "four", "five"};
+
+    private ArrayList<Item> markers_test = new ArrayList<Item>();
 
     // Creates a new instance of ListItemsFragment
     public static ListItemsFragment newInstance() {
@@ -51,6 +55,7 @@ public class ListItemsFragment extends ListFragment {
         setListAdapter(adapter);*/
         Bundle extras = getArguments();
         ArrayList<Item> markersTest = extras.getParcelableArrayList("markers");
+        this.markers_test = markersTest;
 
 
         //CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), MapsActivity.DUMMY_ARRAY_LIST);
@@ -59,5 +64,16 @@ public class ListItemsFragment extends ListFragment {
 
         return super.onCreateView(inflater, container, savedInstanceState);
 
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Item selectedItem = markers_test.get(position);
+
+        // Start InfoActivity and add selectedItem
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), ItemInfo.class);
+        intent.putExtra("item", selectedItem);
+        startActivity(intent);
     }
 }
