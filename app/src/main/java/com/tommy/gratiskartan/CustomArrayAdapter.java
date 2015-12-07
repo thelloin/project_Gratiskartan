@@ -1,7 +1,6 @@
 package com.tommy.gratiskartan;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +11,10 @@ import java.util.ArrayList;
 
 /**
  * Created by tommy on 11/24/15.
+ * CustomArrayAdapter
  */
 public class CustomArrayAdapter extends ArrayAdapter<Item> {
     private final Context context;
-    //private final ContextCompat contextCompat;
     private final ArrayList<Item> items;
 
     public CustomArrayAdapter(Context context, ArrayList<Item> items) {

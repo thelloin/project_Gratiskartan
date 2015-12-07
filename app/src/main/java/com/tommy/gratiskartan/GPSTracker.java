@@ -14,11 +14,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 /**
  * Created by tommy on 11/16/15.
+ * GPSTracker
  */
 public class GPSTracker extends Service implements LocationListener {
     private final Context mContext;

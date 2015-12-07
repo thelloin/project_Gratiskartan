@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
-import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseObject;
 
 public class AddNewItem extends AppCompatActivity {
@@ -53,7 +52,6 @@ public class AddNewItem extends AppCompatActivity {
                 finish();
             }
         });
-        // ************************************************
 
 
         Button addItemButton = (Button) findViewById(R.id.btn_add_item);
@@ -78,14 +76,6 @@ public class AddNewItem extends AppCompatActivity {
     }
 
     private void saveItemToBD() {
-        /*ParseObject testObject = new ParseObject("TestMarkers");
-        testObject.put("latitude", 58.3957299);
-        testObject.put("longitude", 15.57960033);
-        testObject.put("postedBy", "DummyUser3");
-        testObject.put("category", "category3");
-        testObject.put("description", "description3");
-        testObject.saveInBackground();
-        */
         Spinner spinner_cat = (Spinner) findViewById(R.id.spinner_category);
         String categoty = String.valueOf(spinner_cat.getSelectedItem());
 
@@ -99,8 +89,6 @@ public class AddNewItem extends AppCompatActivity {
         object.put("category",categoty);
         object.put("description", description);
         object.saveInBackground();
-
-
 
     }
 }

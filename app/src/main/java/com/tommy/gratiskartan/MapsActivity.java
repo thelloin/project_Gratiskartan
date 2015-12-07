@@ -34,10 +34,7 @@ import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
 
-    //private GoogleMap mMap;
-
-    //private GPSTracker gps;
-
+    // TODO Use theese for actual user position instead of variable centerPos, possibly use both?
     private double curLatitude = 0;
     private double curLongitude = 0;
 
@@ -55,29 +52,6 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     // Toggler on the Toolbar
     private MaterialMenuIconToolbar materialMenu;
 
-    /*public static final Item[] DUMMY_ITEMS =
-            {
-                    new Item(58.39296355, 15.57187557, "Author1", "Category1", "Description1"),
-                    new Item(58.3941106, 15.57432175, "Author2", "Category2", "Description2"),
-                    new Item(58.3957299, 15.57960033, "Author3", "Category3", "Description3"),
-                    new Item(58.39730415, 15.57470798, "Author4", "Category4", "Description4"),
-                    new Item(58.39872091, 15.57397842, "Author5", "Category5", "Description5"),
-                    new Item(58.40157675, 15.57427883, "Author6", "Category6", "Description6"),
-                    new Item(58.40315074, 15.58011532, "Author7", "Category7", "Description7"),
-                    new Item(58.40389274, 15.57625294, "Author8", "Category8", "Description8")
-            };
-
-    public static final ArrayList<Item> DUMMY_ARRAY_LIST = new ArrayList<Item>() {{
-        add(new Item(58.39296355, 15.57187557, "Author1", "Category1", "Description1"));
-        add(new Item(58.3941106, 15.57432175, "Author2", "Category2", "Description2"));
-        add(new Item(58.3957299, 15.57960033, "Author3", "Category3", "Description3"));
-        add(new Item(58.39730415, 15.57470798, "Author4", "Category4", "Description4"));
-        add(new Item(58.39872091, 15.57397842, "Author5", "Category5", "Description5"));
-        add(new Item(58.40157675, 15.57427883, "Author6", "Category6", "Description6"));
-        add(new Item(58.40315074, 15.58011532, "Author7", "Category7", "Description7"));
-        add(new Item(58.40389274, 15.57625294, "Author8", "Category8", "Description8"));
-    }};
-    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +65,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
 
         // Load data from database in a AsyncTask
         new LoadItems().execute();
-        /*
-        // Testing to add GMapFragment at runtime
-        if (findViewById(R.id.fragment_container) != null) {
-            GMapFragment gMapFragment = GMapFragment.newInstance();
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            gMapFragment.setArguments(getIntent().getExtras());
-
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, gMapFragment).commit();
-
-        }*/
 
         // Add the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
@@ -112,7 +74,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Handle your drawable state here
+                // Animate icon to arrow
                 materialMenu.animateState(MaterialMenuDrawable.IconState.ARROW);
             }
         });
@@ -141,36 +103,6 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             }
         });
 
-
-
-
-
-
-        // Testing the Parse SDK
-        // Adding testObject
-        /*ParseObject testObject = new ParseObject("TestMarkers");
-        testObject.put("latitude", 58.3957299);
-        testObject.put("longitude", 15.57960033);
-        testObject.put("postedBy", "DummyUser3");
-        testObject.put("category", "category3");
-        testObject.put("description", "description3");
-        testObject.saveInBackground();
-        */
-
-        // Testing to use GPSTracker
-        /*
-        gps = new GPSTracker(MapsActivity.this);
-        if (gps.canGetLocation()) {
-            curLatitude = gps.getLatitude();
-            curLongitude = gps.getLongitude();
-        } else {
-            gps.showSettingsAlert();
-        }*/
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        /*SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);*/
     }
 
     /**
@@ -188,28 +120,19 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, gmf);
-            //ft.addToBackStack(null);
-            //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
             ft.commit();
         } else {
             ListItemsFragment lf = ListItemsFragment.newInstance();
             Bundle data = new Bundle();
-            // ArrayList<Item> TEMPItemArrayList = new ArrayList<Item>();
-            /*for(ParseObject p : markers) {
-                TEMPItemArrayList.add(new Item(p.getDouble("latitude"),
-                        p.getDouble("longitude"),
-                        p.getString("postedBy"),
-                        p.getString("category"),
-                        p.getString("description")));
-            }*/
+
             data.putParcelableArrayList("markers", markers);
             lf.setArguments(data);
 
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
             ft.replace(R.id.fragment_container, lf);
-            //ft.addToBackStack(null);
-            //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
             ft.commit();
         }
     }
@@ -218,9 +141,6 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     public void onResume() {
         super.onResume();
         //Toast.makeText(MapsActivity.this, "MapsActivity:onResume", Toast.LENGTH_LONG).show();
-
-
-
 
     }
 
@@ -246,17 +166,6 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         }
 
 
-        //FragmentTransaction ft = getFragmentManager().beginTransaction();
-        //ft.replace(R.id.main_linear_layout,lf);
-        //ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        //ft.commit();
-        /*ListItemsFragment lf = ListItemsFragment.newInstance();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.main_linear_layout,lf);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-        ft.commit();*/
-
-
         return super.onOptionsItemSelected(menuItem);
     }
 
@@ -264,42 +173,8 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     @Override
     public void setCenterPos(LatLng centerPos) {
         this.centerPos = centerPos;
-        //Toast.makeText(MapsActivity.this, "Callback from GMapFragment", Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void setMarkers(ArrayList<Item> markers) {
-        // This should not be used anymore
-        Toast.makeText(MapsActivity.this, "Should never be called, this is wrong!", Toast.LENGTH_LONG).show();
-        //this.markers = markers;
-    }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    /*@Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        // Add a marker for the current location
-        LatLng currentLocation = new LatLng(curLatitude, curLongitude);
-        mMap.addMarker(new MarkerOptions()
-        .position(currentLocation)
-        .title("Current Location!!"));
-
-        // Add a marker in Soderkoping and move the camera
-        LatLng soderkoping = new LatLng(58.472815, 16.307447);
-        mMap.addMarker(new MarkerOptions().position(soderkoping).title("Marker in Söderköping"));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(soderkoping));
-    }*/
 
     private class LoadItems extends AsyncTask<Void, Void, Void> {
 
@@ -330,39 +205,10 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             } catch (ParseException e) {
                 System.out.println(" ParseException Error");
             }
-            /*markers.findInBackground(new FindCallback<ParseObject>() {
-                @Override
-                public void done(List<ParseObject> objects, ParseException e) {
-                    if (e == null) {
-                        //Toast.makeText(getActivity(), "Probably works " , Toast.LENGTH_LONG).show();
-                        markersTEST = objects;
-                        itemArrayList = getItemsFromParseObject(objects);
-                        LatLng coord;
-                    /*for(ParseObject marker : markersTEST) {
-                        coord = new LatLng(marker.getDouble("latitude"), marker.getDouble("longitude"));
-                        mMap.addMarker(new MarkerOptions()
-                            .position(coord)
-                            .title(marker.getString("postedBy")));
-                    }*/
-                    /*for (Item item : itemArrayList) {
-                        coord = new LatLng(item.latitude, item.longitude);
-                        mMap.addMarker(new MarkerOptions()
-                                .position(coord)
-                                .title(item.category)
-                                .snippet(item.author + " " + item.description));
-                    }*/
-                    // Send over the markers to the parent activity
-                    /*if (mListener != null) {
-                        mListener.setMarkers(itemArrayList);
-                    }
-                    } else {
-                        //Toast.makeText(getActivity(), "Something went terribly wrong ", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });*/
+
 
             try {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.interrupted();
             }
@@ -386,6 +232,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
 
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
+                // ******** Could probably be removed *********
                 gMapFragment.setArguments(getIntent().getExtras());
                 Bundle data = new Bundle();
 
@@ -395,19 +242,6 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.fragment_container, gMapFragment).commit();
 
-
-                /*
-                ListItemsFragment lf = ListItemsFragment.newInstance();
-                Bundle data = new Bundle();
-
-                data.putParcelableArrayList("markers", markers);
-                lf.setArguments(data);
-
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-                ft.replace(R.id.fragment_container, lf);
-                ft.commit();
-                 */
             }
         }
 

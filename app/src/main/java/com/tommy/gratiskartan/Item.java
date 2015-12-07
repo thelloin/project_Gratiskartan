@@ -6,7 +6,7 @@ import android.util.Log;
 
 /**
  * Created by tommy on 11/24/15.
- * A simple class representing a free item.
+ * A simple class representing a item.
  */
 public class Item implements Parcelable {
 
