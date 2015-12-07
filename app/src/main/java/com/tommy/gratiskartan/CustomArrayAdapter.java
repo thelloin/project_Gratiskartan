@@ -31,7 +31,7 @@ public class CustomArrayAdapter extends ArrayAdapter<Item> {
         TextView firstLine = (TextView) rowView.findViewById(R.id.firstLine);
         TextView secondLine = (TextView) rowView.findViewById(R.id.secondLine);
         firstLine.setText(items.get(position).description);
-        secondLine.setText("Posted by: " + items.get(position).author);
+        secondLine.setText("Posted by: " + items.get(position).author + items.get(position).toBeRemoved);
         // For now skip setting a custom image, leave default
 
 

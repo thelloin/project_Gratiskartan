@@ -30,6 +30,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
@@ -184,7 +185,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         protected Void doInBackground(Void... params) {
 
             // Fetch markers from parse and add to map
-            ParseQuery<ParseObject> query = ParseQuery.getQuery("TestMarkers");
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Items");
             try {
 
                 List<ParseObject> markersFromParse = query.find();
@@ -194,10 +195,11 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
                 for(ParseObject object : markersFromParse) {
                     double latitude = object.getDouble("latitude");
                     double longitude = object.getDouble("longitude");
-                    String postedBy = object.getString("postedBy");
+                    String postedBy = object.getString("createdBy");
                     String category = object.getString("category");
                     String description = object.getString("description");
-                    Item item = new Item(latitude, longitude, postedBy, category, description);
+                    Date toBeRemoved = object.getDate("timeToBeRemoved");
+                    Item item = new Item(latitude, longitude, postedBy, category, description, toBeRemoved);
                     items.add(item);
                 }
                 markers = items;

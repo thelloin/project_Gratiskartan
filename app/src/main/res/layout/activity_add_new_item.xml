@@ -19,53 +19,117 @@
         android:layout_height="wrap_content"
         android:text="Kategori"
         android:id="@+id/tv_category"
-        android:layout_below="@+id/add_item_toolbar"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_below="@+id/radioGroup"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="33dp"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="84dp" />
+        android:layout_marginTop="32dp" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_category"
+        android:prompt="@string/category_prompt"
+        android:entries="@array/categories"
         android:layout_below="@+id/tv_category"
         android:layout_alignLeft="@+id/tv_category"
-        android:layout_alignStart="@+id/tv_category"
-        android:prompt="@string/category_prompt"
-        android:entries="@array/categories"/>
+        android:layout_alignStart="@+id/tv_category" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Beskrivning"
         android:id="@+id/tv_description"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/spinner_category"
-        android:layout_alignStart="@+id/spinner_category" />
+        android:layout_below="@+id/spinner_days"
+        android:layout_alignLeft="@+id/spinner_days"
+        android:layout_alignStart="@+id/spinner_days"
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
-        android:lines="3"
+        android:lines="1"
         android:ems="10"
         android:hint="Skriv in en beskrivning av objektet."
         android:id="@+id/ed_description"
         android:layout_below="@+id/tv_description"
         android:layout_alignLeft="@+id/tv_description"
-        android:layout_alignStart="@+id/tv_description"
-        android:layout_marginRight="33dp"/>
+        android:layout_alignStart="@+id/tv_description" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Lägg till"
         android:id="@+id/btn_add_item"
-        android:layout_marginTop="54dp"
-        android:layout_below="@+id/ed_description"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hur länge ska objektet ligga kvar?"
+        android:id="@+id/tv_ttl"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/spinner_category"
+        android:layout_alignStart="@+id/spinner_category" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_days"
+        android:entries="@array/days"
+        android:layout_below="@+id/tv_ttl"
+        android:layout_alignLeft="@+id/tv_ttl"
+        android:layout_alignStart="@+id/tv_ttl"
+        android:layout_toLeftOf="@+id/tv_days"
+        android:layout_toStartOf="@+id/tv_days" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="dagar"
+        android:id="@+id/tv_days"
+        android:layout_alignBottom="@+id/spinner_days"
+        android:layout_alignLeft="@+id/btn_add_item"
+        android:layout_alignStart="@+id/btn_add_item" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Var"
+        android:id="@+id/tv_where"
+        android:layout_below="@+id/add_item_toolbar"
+        android:layout_alignLeft="@+id/tv_category"
+        android:layout_alignStart="@+id/tv_category"
+        android:layout_marginTop="33dp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_where"
+        android:layout_alignLeft="@+id/tv_where"
+        android:layout_alignStart="@+id/tv_where"
+        android:orientation="horizontal"
+        android:id="@+id/radioGroup">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min position"
+            android:id="@+id/radio_btn_my_position"
+            android:checked="true"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Centrerad på kartan"
+            android:id="@+id/radio_btn_center_of_map" />
+
+    </RadioGroup>
 
 
 </RelativeLayout>

@@ -10,12 +10,16 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
 import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.parse.ParseObject;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class AddNewItem extends AppCompatActivity {
 
@@ -77,17 +81,45 @@ public class AddNewItem extends AppCompatActivity {
 
     private void saveItemToBD() {
         Spinner spinner_cat = (Spinner) findViewById(R.id.spinner_category);
-        String categoty = String.valueOf(spinner_cat.getSelectedItem());
+        String category = String.valueOf(spinner_cat.getSelectedItem());
 
         EditText ed_description = (EditText) findViewById(R.id.ed_description);
         String description = ed_description.getText().toString();
 
-        ParseObject object = new ParseObject("TestMarkers");
-        object.put("latitude", curLatitude);
-        object.put("longitude", curLongitude);
-        object.put("postedBy", "User");
-        object.put("category",categoty);
+
+        double lat = 0.0;
+        double longi = 0.0;
+        RadioButton my_pos = (RadioButton) findViewById(R.id.radio_btn_my_position);
+        if (my_pos.isChecked()) {
+            GPSTracker gps = new GPSTracker(AddNewItem.this);
+            if (gps.canGetLocation()) {
+                lat = gps.getLatitude();
+                longi = gps.getLongitude();
+            } else {
+                gps.showSettingsAlert();
+            }
+        } else {
+            lat = curLatitude;
+            longi = curLongitude;
+        }
+
+        Spinner spinner_ttl = (Spinner) findViewById(R.id.spinner_days);
+        //int ttl = Integer.getInteger(String.valueOf(spinner_ttl.getSelectedItem()));
+        int ttl = Integer.parseInt(String.valueOf(spinner_ttl.getSelectedItem()));
+        Date toBeRemoved = new Date();
+        Calendar c = Calendar.getInstance();
+        c.setTime(toBeRemoved);
+        c.add(Calendar.DATE, ttl);
+        toBeRemoved = c.getTime();
+
+
+        ParseObject object = new ParseObject("Items");
+        object.put("latitude", lat);
+        object.put("longitude", longi);
+        object.put("createdBy", "Anonymous");
+        object.put("category",category);
         object.put("description", description);
+        object.put("timeToBeRemoved", toBeRemoved);
         object.saveInBackground();
 
     }

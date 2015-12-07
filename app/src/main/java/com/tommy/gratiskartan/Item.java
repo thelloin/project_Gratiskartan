@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import java.util.Date;
+
 /**
  * Created by tommy on 11/24/15.
  * A simple class representing a item.
@@ -17,6 +19,7 @@ public class Item implements Parcelable {
     public String author;
     public String category;
     // time to live - Date()????
+    public Date toBeRemoved;
     public String description;
     // picture - String url?????
 
@@ -34,16 +37,18 @@ public class Item implements Parcelable {
         author = source.readString();
         category = source.readString();
         description = source.readString();
+        toBeRemoved = new Date(source.readLong());
 
     }
 
     public Item(double latitude, double longitude, String author,
-                String category, String description) {
+                String category, String description, Date toBeRemoved) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.author = author;
         this.category = category;
         this.description = description;
+        this.toBeRemoved = toBeRemoved;
     }
 
     @Override
@@ -59,7 +64,7 @@ public class Item implements Parcelable {
         dest.writeString(author);
         dest.writeString(category);
         dest.writeString(description);
-
+        dest.writeLong(toBeRemoved.getTime());
     }
 
     /**

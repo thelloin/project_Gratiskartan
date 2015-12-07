@@ -18,7 +18,6 @@ import java.util.ArrayList;
  */
 public class ListItemsFragment extends ListFragment {
 
-    String[] list_test = new String[] {"one", "two", "three", "four", "five"};
 
     private ArrayList<Item> markers_test = new ArrayList<Item>();
 
