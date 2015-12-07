@@ -42,6 +42,8 @@ public class GMapFragment extends SupportMapFragment implements
 
     private ArrayList<Item> itemArrayList = null;
 
+    private ArrayList<Item> markers = null;
+
     private OnFragmentInteractionListener mListener;
     /**
      * Use this factory method to create a new instance of
@@ -67,6 +69,7 @@ public class GMapFragment extends SupportMapFragment implements
         } else {
 
         }
+        Toast.makeText(getActivity(), "GMapFragment:onCreate", Toast.LENGTH_SHORT).show();
 
         getMapAsync(this);
     }
@@ -76,12 +79,19 @@ public class GMapFragment extends SupportMapFragment implements
         super.onSaveInstanceState(outState);
     }
 
-    /*@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_map, container, false);
-    }*/
+        //View rootView = inflater.inflate(R.layout.fragment_map, container, false);
+        //Toast.makeText(getActivity(), "GMapFragment:onCreateView", Toast.LENGTH_SHORT).show();
+
+        Bundle extras = getArguments();
+        this.markers = extras.getParcelableArrayList("markers");
+        //this.markers = markersTest;
+
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
     @Override
     public boolean onMarkerClick(Marker marker) {
@@ -90,11 +100,21 @@ public class GMapFragment extends SupportMapFragment implements
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        // Add some dummy markers
         mMap = googleMap;
 
-        // Test to set up mMap
+        // Test to set up mMap to handle different events
         setUpmMap();
+
+
+        // Add markers to map
+        LatLng coord;
+        for (Item item : markers) {
+            coord = new LatLng(item.latitude, item.longitude);
+            mMap.addMarker(new MarkerOptions()
+                    .position(coord)
+                    .title(item.category)
+                    .snippet(item.author + " " + item.description));
+        }
 
         /*
         LatLng coords;
@@ -106,6 +126,10 @@ public class GMapFragment extends SupportMapFragment implements
                     .title(MapsActivity.DUMMY_ITEMS[i].description));
         }
         */
+
+        /*
+        *****************************************************************
+
         // Fetch markers from parse and add to map
         ParseQuery<ParseObject> markers = ParseQuery.getQuery("TestMarkers");
         markers.findInBackground(new FindCallback<ParseObject>() {
@@ -121,23 +145,27 @@ public class GMapFragment extends SupportMapFragment implements
                         mMap.addMarker(new MarkerOptions()
                             .position(coord)
                             .title(marker.getString("postedBy")));
-                    }*/
-                    for(Item item: itemArrayList) {
+                    }
+                    for (Item item : itemArrayList) {
                         coord = new LatLng(item.latitude, item.longitude);
                         mMap.addMarker(new MarkerOptions()
-                            .position(coord)
-                            .title(item.category)
-                            .snippet(item.author + " " + item.description));
+                                .position(coord)
+                                .title(item.category)
+                                .snippet(item.author + " " + item.description));
                     }
                     // Send over the markers to the parent activity
                     if (mListener != null) {
                         mListener.setMarkers(itemArrayList);
                     }
                 } else {
-                    Toast.makeText(getActivity(), "Something went terribly wrong " , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Something went terribly wrong ", Toast.LENGTH_LONG).show();
                 }
             }
         });
+        **************************************************************
+        */
+
+
         /*try {
 
             int numbersOfMarkers = markers.count();
@@ -204,7 +232,7 @@ public class GMapFragment extends SupportMapFragment implements
                 String[] postedByAndDesc = snippet.split(" ", 2);
                 //  + " desc: " + postedByAndDesc[1]
                 Toast.makeText(getActivity(), "Title: " + title + " author: " + postedByAndDesc[0]  + " desc: " + postedByAndDesc[1], Toast.LENGTH_LONG).show();
-                for (Item item : itemArrayList) {
+                for (Item item : markers) {
                     if (item.category.equals(title) && item.author.equals(postedByAndDesc[0])
                             && item.description.equals(postedByAndDesc[1]) ) {
 

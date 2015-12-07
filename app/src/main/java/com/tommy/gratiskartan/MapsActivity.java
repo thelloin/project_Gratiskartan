@@ -1,17 +1,21 @@
 package com.tommy.gratiskartan;
 
 //import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.balysv.materialmenu.MaterialMenuDrawable;
@@ -19,17 +23,20 @@ import com.balysv.materialmenu.extras.toolbar.MaterialMenuIconToolbar;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.parse.FindCallback;
 import com.parse.Parse;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
 
-    private GoogleMap mMap;
+    //private GoogleMap mMap;
 
-    private GPSTracker gps;
+    //private GPSTracker gps;
 
     private double curLatitude = 0;
     private double curLongitude = 0;
@@ -48,7 +55,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     // Toggler on the Toolbar
     private MaterialMenuIconToolbar materialMenu;
 
-    public static final Item[] DUMMY_ITEMS =
+    /*public static final Item[] DUMMY_ITEMS =
             {
                     new Item(58.39296355, 15.57187557, "Author1", "Category1", "Description1"),
                     new Item(58.3941106, 15.57432175, "Author2", "Category2", "Description2"),
@@ -70,12 +77,20 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         add(new Item(58.40315074, 15.58011532, "Author7", "Category7", "Description7"));
         add(new Item(58.40389274, 15.57625294, "Author8", "Category8", "Description8"));
     }};
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+
+        // Enable and initialize parse
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "3pWEzeHgdbgiES4KRdNmp56eoDTHcxhpXsCmAyP9", "JsGTeFwPQEquUqERwKng05XhmyDGsMsNMmHRd8hP");
+
+        // Load data from database in a AsyncTask
+        new LoadItems().execute();
         /*
         // Testing to add GMapFragment at runtime
         if (findViewById(R.id.fragment_container) != null) {
@@ -127,9 +142,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         });
 
 
-        // Enable and initialize parse
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this, "3pWEzeHgdbgiES4KRdNmp56eoDTHcxhpXsCmAyP9", "JsGTeFwPQEquUqERwKng05XhmyDGsMsNMmHRd8hP");
+
 
 
 
@@ -168,6 +181,11 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         if (showMap) {
             GMapFragment gmf = GMapFragment.newInstance();
 
+
+            Bundle data = new Bundle();
+            data.putParcelableArrayList("markers", markers);
+            gmf.setArguments(data);
+
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, gmf);
             //ft.addToBackStack(null);
@@ -175,9 +193,8 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             ft.commit();
         } else {
             ListItemsFragment lf = ListItemsFragment.newInstance();
-            // TODO Add bundle to lf, add ArrayList<Item> to bundle, Item need to implement parceble
             Bundle data = new Bundle();
-            ArrayList<Item> TEMPItemArrayList = new ArrayList<Item>();
+            // ArrayList<Item> TEMPItemArrayList = new ArrayList<Item>();
             /*for(ParseObject p : markers) {
                 TEMPItemArrayList.add(new Item(p.getDouble("latitude"),
                         p.getDouble("longitude"),
@@ -200,21 +217,10 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(MapsActivity.this, "MapsActivity:onResume", Toast.LENGTH_LONG).show();
+        //Toast.makeText(MapsActivity.this, "MapsActivity:onResume", Toast.LENGTH_LONG).show();
 
 
-        // Testing to add GMapFragment at runtime
-        if (findViewById(R.id.fragment_container) != null) {
-            GMapFragment gMapFragment = GMapFragment.newInstance();
 
-            // In case this activity was started with special instructions from an
-            // Intent, pass the Intent's extras to the fragment as arguments
-            gMapFragment.setArguments(getIntent().getExtras());
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, gMapFragment).commit();
-
-        }
 
     }
 
@@ -263,7 +269,9 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
 
     @Override
     public void setMarkers(ArrayList<Item> markers) {
-        this.markers = markers;
+        // This should not be used anymore
+        Toast.makeText(MapsActivity.this, "Should never be called, this is wrong!", Toast.LENGTH_LONG).show();
+        //this.markers = markers;
     }
 
 
@@ -292,4 +300,117 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
         mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(soderkoping));
     }*/
+
+    private class LoadItems extends AsyncTask<Void, Void, Void> {
+
+        private ProgressDialog pb = new ProgressDialog(MapsActivity.this);
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            // Fetch markers from parse and add to map
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("TestMarkers");
+            try {
+
+                List<ParseObject> markersFromParse = query.find();
+                // Convert the parseObjects to ArrayList of Items
+                ArrayList<Item> items = new ArrayList<Item>();
+
+                for(ParseObject object : markersFromParse) {
+                    double latitude = object.getDouble("latitude");
+                    double longitude = object.getDouble("longitude");
+                    String postedBy = object.getString("postedBy");
+                    String category = object.getString("category");
+                    String description = object.getString("description");
+                    Item item = new Item(latitude, longitude, postedBy, category, description);
+                    items.add(item);
+                }
+                markers = items;
+
+            } catch (ParseException e) {
+                System.out.println(" ParseException Error");
+            }
+            /*markers.findInBackground(new FindCallback<ParseObject>() {
+                @Override
+                public void done(List<ParseObject> objects, ParseException e) {
+                    if (e == null) {
+                        //Toast.makeText(getActivity(), "Probably works " , Toast.LENGTH_LONG).show();
+                        markersTEST = objects;
+                        itemArrayList = getItemsFromParseObject(objects);
+                        LatLng coord;
+                    /*for(ParseObject marker : markersTEST) {
+                        coord = new LatLng(marker.getDouble("latitude"), marker.getDouble("longitude"));
+                        mMap.addMarker(new MarkerOptions()
+                            .position(coord)
+                            .title(marker.getString("postedBy")));
+                    }*/
+                    /*for (Item item : itemArrayList) {
+                        coord = new LatLng(item.latitude, item.longitude);
+                        mMap.addMarker(new MarkerOptions()
+                                .position(coord)
+                                .title(item.category)
+                                .snippet(item.author + " " + item.description));
+                    }*/
+                    // Send over the markers to the parent activity
+                    /*if (mListener != null) {
+                        mListener.setMarkers(itemArrayList);
+                    }
+                    } else {
+                        //Toast.makeText(getActivity(), "Something went terribly wrong ", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });*/
+
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                Thread.interrupted();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            pb.setMessage("Loading...");
+            pb.show();
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            pb.dismiss();
+
+            // After we are done loading the database, start fragment
+            if (findViewById(R.id.fragment_container) != null) {
+                GMapFragment gMapFragment = GMapFragment.newInstance();
+
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
+                gMapFragment.setArguments(getIntent().getExtras());
+                Bundle data = new Bundle();
+
+                data.putParcelableArrayList("markers", markers);
+                gMapFragment.setArguments(data);
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, gMapFragment).commit();
+
+
+                /*
+                ListItemsFragment lf = ListItemsFragment.newInstance();
+                Bundle data = new Bundle();
+
+                data.putParcelableArrayList("markers", markers);
+                lf.setArguments(data);
+
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+                ft.replace(R.id.fragment_container, lf);
+                ft.commit();
+                 */
+            }
+        }
+
+
+    }
 }
