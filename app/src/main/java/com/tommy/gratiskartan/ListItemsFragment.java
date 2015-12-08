@@ -38,6 +38,8 @@ public class ListItemsFragment extends ListFragment {
         ArrayList<Item> markersTest = extras.getParcelableArrayList("markers");
         this.markers_test = markersTest;
 
+        
+
         CustomArrayAdapter adapter = new CustomArrayAdapter(getContext(), markersTest);
         setListAdapter(adapter);
 
