@@ -192,15 +192,35 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
                 // Convert the parseObjects to ArrayList of Items
                 ArrayList<Item> items = new ArrayList<Item>();
 
+                Date currentDate = new Date();
                 for(ParseObject object : markersFromParse) {
-                    double latitude = object.getDouble("latitude");
-                    double longitude = object.getDouble("longitude");
-                    String postedBy = object.getString("createdBy");
-                    String category = object.getString("category");
-                    String description = object.getString("description");
-                    Date toBeRemoved = object.getDate("timeToBeRemoved");
-                    Item item = new Item(latitude, longitude, postedBy, category, description, toBeRemoved);
-                    items.add(item);
+                    // Before converting the objects to Items, check if
+                    // the date has expired and if so, remove that object
+                    // from the database
+                    Date toBeRem = object.getDate("timeToBeRemoved");
+                    if (toBeRem.before(currentDate)) {
+                        /*System.out.println("*******************************************************");
+                        System.out.println(toBeRem + " should be removed. *************************");
+                        System.out.println(currentDate + " is the current date. *************************");
+                        System.out.println("*******************************************************");
+                        */
+                        object.deleteInBackground();
+                    } else {
+                        /*System.out.println("*******************************************************");
+                        System.out.println(toBeRem + " should NOT be removed. *************************");
+                        System.out.println(currentDate + " is the current date. *************************");
+                        System.out.println("*******************************************************");
+                        */
+                        double latitude = object.getDouble("latitude");
+                        double longitude = object.getDouble("longitude");
+                        String postedBy = object.getString("createdBy");
+                        String category = object.getString("category");
+                        String description = object.getString("description");
+                        Date toBeRemoved = object.getDate("timeToBeRemoved");
+                        Item item = new Item(latitude, longitude, postedBy, category, description, toBeRemoved);
+                        items.add(item);
+                    }
+
                 }
                 markers = items;
 

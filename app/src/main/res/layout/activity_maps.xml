@@ -16,21 +16,33 @@
         android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        test:fab_icon="@drawable/ic_list"
-        android:layout_gravity="bottom|end"
-        android:layout_marginBottom="16dp" />
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent">
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
 
-    <FrameLayout
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            test:fab_icon="@drawable/ic_list"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"/>
+
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+
+
+    <!--<FrameLayout
         android:id="@+id/progressbar_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -40,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"/>
     </FrameLayout>
-
+    -->
 
     <!--
     <fragment
