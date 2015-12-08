@@ -5,20 +5,23 @@
     <!-- Mark as favorite, should always appear if possible -->
     <item
         android:id="@+id/menu_add_item_done"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@android:drawable/ic_menu_save"
         android:title="Done"
         app:showAsAction="ifRoom"
         />
+    <!--
     <item
         android:id="@+id/menu_add_item_cancel"
         android:icon="@mipmap/ic_launcher"
         android:title="Cancel"
         app:showAsAction="ifRoom"
         />
+        -->
 
     <!-- Settings, should always be in the overflow -->
-    <item
+    <!--<item
         android:id="@+id/action_settings"
         android:title="Settings"
         app:showAsAction="never" />
+        -->
 </menu>

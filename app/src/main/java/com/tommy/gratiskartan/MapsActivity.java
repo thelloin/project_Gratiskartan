@@ -35,6 +35,8 @@ import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
 
+    static final int ADD_NEW_ITEM_REQUEST = 1;
+
     // TODO Use theese for actual user position instead of variable centerPos, possibly use both?
     private double curLatitude = 0;
     private double curLongitude = 0;
@@ -162,12 +164,23 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             Intent intent = new Intent(this, AddNewItem.class);
             intent.putExtra(CUR_LATITUDE_POS, centerPos.latitude);
             intent.putExtra(CUR_LONGITUDE_POS, centerPos.longitude);
-            startActivity(intent);
+            //startActivity(intent);
+            startActivityForResult(intent, ADD_NEW_ITEM_REQUEST);
             return true;
         }
 
-
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request code to respond to
+        if (requestCode == ADD_NEW_ITEM_REQUEST) {
+            // Check if we need to refresh items
+            if (resultCode == RESULT_OK) {
+                new LoadItems().execute();
+            }
+        }
     }
 
     // Temporary method for getting center pos of map
