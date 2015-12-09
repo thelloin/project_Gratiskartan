@@ -119,7 +119,7 @@ public class GMapFragment extends SupportMapFragment implements
             mMap.addMarker(new MarkerOptions()
                     .position(coord)
                     .title(item.category)
-                    .snippet(item.author + " " + item.description)
+                    .snippet(item.description)
                     .icon(hh));
         }
 
@@ -130,6 +130,11 @@ public class GMapFragment extends SupportMapFragment implements
         LatLng cameraPos = new LatLng(58.39858598, 15.57723999);
         mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
+
+        if (mListener != null) {
+            // Send over the center position of the map
+            mListener.setCenterPos(cameraPos);
+        }
 
 
         /*
@@ -174,12 +179,11 @@ public class GMapFragment extends SupportMapFragment implements
                 String title = marker.getTitle();
                 String snippet = marker.getSnippet();
 
-                String[] postedByAndDesc = snippet.split(" ", 2);
+                //String[] postedByAndDesc = snippet.split(" ", 2);
 
                 //Toast.makeText(getActivity(), "Title: " + title + " author: " + postedByAndDesc[0]  + " desc: " + postedByAndDesc[1], Toast.LENGTH_LONG).show();
                 for (Item item : markers) {
-                    if (item.category.equals(title) && item.author.equals(postedByAndDesc[0])
-                            && item.description.equals(postedByAndDesc[1]) ) {
+                    if (item.category.equals(title) && item.description.equals(snippet) ) {
 
                         // Correct item is found, start InfoActivity and
                         // pass along the item

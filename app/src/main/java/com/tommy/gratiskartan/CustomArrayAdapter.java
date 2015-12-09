@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +33,9 @@ public class CustomArrayAdapter extends ArrayAdapter<Item> {
         TextView firstLine = (TextView) rowView.findViewById(R.id.firstLine);
         TextView secondLine = (TextView) rowView.findViewById(R.id.secondLine);
         firstLine.setText(items.get(position).description);
-        secondLine.setText("Posted by: " + items.get(position).author + items.get(position).toBeRemoved);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("E dd/MM 'kl' kk:mm");
+        secondLine.setText("Tillgänglig till: " + dateFormat.format(items.get(position).toBeRemoved));
 
         // Add the image
         ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);

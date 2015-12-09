@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upplagt av:"
+        android:text="Kategori:"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Kategori:"
+        android:text="Tillgänglig till:"
         android:id="@+id/textView2"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/tv_info_postedBy"
+        android:id="@+id/tv_info_category"
         android:layout_alignBottom="@+id/textView"
         android:layout_toRightOf="@+id/textView3"
         android:layout_toEndOf="@+id/textView3"
@@ -52,10 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/tv_info_category"
+        android:id="@+id/tv_info_available_to"
         android:layout_alignBottom="@+id/textView2"
-        android:layout_alignLeft="@+id/tv_info_postedBy"
-        android:layout_alignStart="@+id/tv_info_postedBy" />
+        android:layout_alignLeft="@+id/tv_info_category"
+        android:layout_alignStart="@+id/tv_info_category" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,24 +63,25 @@
         android:text="New Text"
         android:id="@+id/tv_info_description"
         android:layout_alignBottom="@+id/textView3"
-        android:layout_alignLeft="@+id/tv_info_category"
-        android:layout_alignStart="@+id/tv_info_category" />
+        android:layout_alignLeft="@+id/tv_info_available_to"
+        android:layout_alignStart="@+id/tv_info_available_to" />
 
+    <!--
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Jag vill ha!"
         android:id="@+id/btn_info_want"
-        android:layout_below="@+id/tv_info_description"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="127dp" />
-
+        android:layout_marginBottom="148dp" />
+    -->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tillbaka"
         android:id="@+id/btn_info_back"
-        android:layout_below="@+id/btn_info_want"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_marginTop="138dp"
+        android:layout_below="@+id/tv_info_description"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
