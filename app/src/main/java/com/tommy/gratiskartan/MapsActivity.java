@@ -36,6 +36,7 @@ import java.util.List;
 public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnFragmentInteractionListener {
 
     static final int ADD_NEW_ITEM_REQUEST = 1;
+    static final int SEARCH_REQUEST = 2;
 
     // TODO Use theese for actual user position instead of variable centerPos, possibly use both?
     private double curLatitude = 0;
@@ -168,6 +169,11 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             startActivityForResult(intent, ADD_NEW_ITEM_REQUEST);
             return true;
         }
+        if (id == R.id.action_search) {
+            Intent intent = new Intent(this, SearchActivity.class);
+            startActivityForResult(intent, SEARCH_REQUEST);
+            return true;
+        }
 
         return super.onOptionsItemSelected(menuItem);
     }
@@ -179,6 +185,16 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             // Check if we need to refresh items
             if (resultCode == RESULT_OK) {
                 new LoadItems().execute();
+            }
+        }
+        if (requestCode == SEARCH_REQUEST) {
+            // Check if user actually made a search
+            if (resultCode == RESULT_OK) {
+                // Retrive what user searched for and perform search to db
+                String searchFor = data.getStringExtra("searchFor");
+                //Toast.makeText(MapsActivity.this, searchFor, Toast.LENGTH_SHORT).show();
+                new SearchItems().execute(searchFor);
+
             }
         }
     }
@@ -268,6 +284,91 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
                 // In case this activity was started with special instructions from an
                 // Intent, pass the Intent's extras to the fragment as arguments
                 // ******** Could probably be removed *********
+                gMapFragment.setArguments(getIntent().getExtras());
+                Bundle data = new Bundle();
+
+                data.putParcelableArrayList("markers", markers);
+                gMapFragment.setArguments(data);
+
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, gMapFragment).commit();
+
+            }
+        }
+
+
+    }
+
+
+    private class SearchItems extends AsyncTask<String, Void, Void> {
+
+        private ProgressDialog pb = new ProgressDialog(MapsActivity.this);
+
+        @Override
+        protected Void doInBackground(String... params) {
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Items");
+            try {
+
+                query.whereEqualTo("category", params[0]);
+                List<ParseObject> markersFromParse = query.find();
+                // Convert the parseObjects to ArrayList of Items
+                ArrayList<Item> items = new ArrayList<Item>();
+
+                Date currentDate = new Date();
+                for(ParseObject object : markersFromParse) {
+                    // Before converting the objects to Items, check if
+                    // the date has expired and if so, remove that object
+                    // from the database
+                    Date toBeRem = object.getDate("timeToBeRemoved");
+                    if (toBeRem.before(currentDate)) {
+
+                        object.deleteInBackground();
+                    } else {
+
+                        double latitude = object.getDouble("latitude");
+                        double longitude = object.getDouble("longitude");
+                        String postedBy = object.getString("createdBy");
+                        String category = object.getString("category");
+                        String description = object.getString("description");
+                        Date toBeRemoved = object.getDate("timeToBeRemoved");
+                        Item item = new Item(latitude, longitude, postedBy, category, description, toBeRemoved);
+                        items.add(item);
+                    }
+
+                }
+                markers = items;
+
+            } catch (ParseException e) {
+                System.out.println(" ParseException Error");
+            }
+
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                Thread.interrupted();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            pb.setMessage("Searching...");
+            pb.show();
+
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            pb.dismiss();
+
+            // After we are done searching the database, start fragment
+            if (findViewById(R.id.fragment_container) != null) {
+                GMapFragment gMapFragment = GMapFragment.newInstance();
+
+                // In case this activity was started with special instructions from an
+                // Intent, pass the Intent's extras to the fragment as arguments
                 gMapFragment.setArguments(getIntent().getExtras());
                 Bundle data = new Bundle();
 
