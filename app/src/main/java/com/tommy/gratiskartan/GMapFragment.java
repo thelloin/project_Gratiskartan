@@ -12,6 +12,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -100,12 +102,28 @@ public class GMapFragment extends SupportMapFragment implements
         LatLng coord;
         for (Item item : markers) {
             coord = new LatLng(item.latitude, item.longitude);
+            BitmapDescriptor hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_fruit_test);
+            if (item.category.equals("Frukt")) {
+                hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_fruit_test);
+            } else if (item.category.equals("Bär")) {
+                hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_berries_test);
+            } else if (item.category.equals("Elektronik")) {
+                hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_electronics_test);
+            } else if (item.category.equals("För Hemmet")) {
+                hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_home_test);
+            } else if (item.category.equals("Hobby")) {
+                hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_hobby_test);
+            } else if (item.category.equals("Övrigt")) {
+                hh = BitmapDescriptorFactory.fromResource(R.drawable.ic_other_test);
+            }
             mMap.addMarker(new MarkerOptions()
                     .position(coord)
                     .title(item.category)
-                    .snippet(item.author + " " + item.description));
+                    .snippet(item.author + " " + item.description)
+                    .icon(hh));
         }
 
+        // BitmapDescriptorFactory.fromResource(R.drawable.ic_electronics_test))
 
         // TODO Get user position with the class GPSTracker
         // Move the camera
@@ -113,6 +131,27 @@ public class GMapFragment extends SupportMapFragment implements
         mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
 
+
+        /*
+        Test code to find out good resolution for images used as markers
+         */
+        /*LatLng tempCoord = new LatLng(40.735812, -74.178078);
+        mMap.addMarker(new MarkerOptions()
+                    .position(tempCoord)
+                    .title("32")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.threetwo)));
+
+        tempCoord = new LatLng(40.747257, -73.959725);
+        mMap.addMarker(new MarkerOptions()
+                .position(tempCoord)
+                .title("64")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.sixfour)));
+        tempCoord = new LatLng(40.7587, -73.727639);
+        mMap.addMarker(new MarkerOptions()
+                .position(tempCoord)
+                .title("128")
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.onetwoeight)));
+        */
     }
 
 

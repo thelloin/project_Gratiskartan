@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,7 +33,23 @@ public class CustomArrayAdapter extends ArrayAdapter<Item> {
         TextView secondLine = (TextView) rowView.findViewById(R.id.secondLine);
         firstLine.setText(items.get(position).description);
         secondLine.setText("Posted by: " + items.get(position).author + items.get(position).toBeRemoved);
-        // For now skip setting a custom image, leave default
+
+        // Add the image
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.list_image);
+        if (items.get(position).category.equals("Frukt")) {
+            imageView.setImageResource(R.drawable.ic_fruit_test);
+        } else if (items.get(position).category.equals("Bär")) {
+            imageView.setImageResource(R.drawable.ic_berries_test);
+        } else if (items.get(position).category.equals("Elektronik")) {
+            imageView.setImageResource(R.drawable.ic_electronics_test);
+        } else if (items.get(position).category.equals("För Hemmet")) {
+            imageView.setImageResource(R.drawable.ic_home_test);
+        } else if (items.get(position).category.equals("Hobby")) {
+            imageView.setImageResource(R.drawable.ic_hobby_test);
+        } else if (items.get(position).category.equals("Övrigt")) {
+            imageView.setImageResource(R.drawable.ic_other_test);
+        }
+
 
 
         return rowView;
