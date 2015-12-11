@@ -15,6 +15,9 @@ fokusera mer på någoin relevant delmängd för att bli unik i förhållande ti
 
 
 1. Bortskänkes (app)
+
+   	       https://play.google.com/store/apps/details?id=se.bortskankes.www
+
    	       Denna app ser jag som den största konkurrenten till min app. Den funktionalitet som de erbjuder påminner till stor del
 	       om den funktionalitet som Gratiskartan erbjuder.
 
@@ -33,7 +36,34 @@ fokusera mer på någoin relevant delmängd för att bli unik i förhållande ti
 
 2. Fruktkartan (hemsida)
    	       
+	       http://www.fruktkartan.se/
 
-3. Bjussa.se (hemsida)
+	       Som namnet antyder finns det på den här hemsidan en karta där användare kan lägga upp olika typer av fruktträd och buskar
+	       som finns tillgängliga i naturen och på hustomter. För att lägga upp någonting på fruktkartan så behöver man inte registrera
+	       sig och man kan även redigera eller ta bort objekt på kartan. Det faktum att alla kan gå in och redigera olika typer av objekt
+	       ser jag som en styrka på den här sidan, man låter alltså användarna vara med att bestämma och sanera innehållet på sidan.
+	       Detta skapar nog ett engagemang och underlättar för administratörerna på sidan. Min app, Gratiskartan, kommer också låta
+	       användarna till viss mån vara med och bestämma innehållet på sidan på så sätt att man kan "flagga" ett utlagt objekt. Med
+	       en flaggning säger användaren att detta objekt inte passar på Gratiskartan, till exempel är det inte gratis eller så kanske
+	       någon lagt upp något olämligt. Får ett objekt 3 flaggningar tas det bort från kartan.
 
-4. Blocket (app)
+	       Fruktkartan.se finns inte som någon app till android och det talar för att Gratiskartan skulle kunna locka över en viss del av
+	       användarna till sig. Gratiskartan följer till mångt och mycket de riktlinjer som finns för hur användargränssnittet för en
+	       android-applikation ska vara uppbyggd, detta gör förhoppningsvis att användare intuitivt får en känsla för hur appen olika
+	       funktioner finns och fungerar. 
+	       Visst kan man från mobilens webläsare gå in på fruktkartan.se och använda den men användargränssnittet blir lätt lite "tungrott",
+	       speciellt om man ska gå in och redigera ett objekt.
+
+
+3. Blocket     (app)
+
+   	       https://play.google.com/store/apps/details?id=se.appcorn.Blocket&hl=sv
+
+	       Jag ser även appen Blocket som en konkurent till min app. Med tanke på att denna app är sveriges helt klart största köp- och 
+	       sälj-marknad kan det hända att en användare av ren vana lägger upp någonting här som bortskänkes. Självklart kan det också vara
+	       så att man väljer att lägga upp nånting som skänkes på blocket för att exponera annonsen till så många som möjligt. Den stora
+	       fördelen som jag ser det att lägga upp en annons på Gratiskartan gentemot Blocket är att det är gratis. När en användare lägger
+	       upp ett objekt som dom ska ha betalt för finns det en motivation för användaren att betala en liten summa till blocket.se för att
+	       ändå tjäna en summa totalt men jag tror att det finns en ganska stor ovilja hos användarna att vara tvungen att betala för att
+	       skänka bort något. Det är denna ovilja som jag tror skulle kunna få en person att istället välja att lägga upp något på
+	       Gratiskartan för där kommer det alltid att vara gratis att göra det.
