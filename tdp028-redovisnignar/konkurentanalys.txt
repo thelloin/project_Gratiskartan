@@ -15,8 +15,24 @@ fokusera mer på någoin relevant delmängd för att bli unik i förhållande ti
 
 
 1. Bortskänkes (app)
+   	       Denna app ser jag som den största konkurrenten till min app. Den funktionalitet som de erbjuder påminner till stor del
+	       om den funktionalitet som Gratiskartan erbjuder.
+
+	       Bortskänkes är en app där användare lägger upp objekt som de vill skänka bort. För att kunna lägga upp ett objekt måste
+	       användaren registrera sig med mobilnummer och e-post.
+	       För att söka på olika objekt är det mest användarvänligt att söka med avseende på det län man befinner sig i, man kan 
+	       även söka på objekt i närheten där man befinner sig men då måste man först ha skrivit in sitt postnummer. Detta är något
+	       som jag tycker talar emot denna app gentemot min då det känns ganska naturligt att man i första hand vill söka på objekt
+	       i sin närhet(sen ska man självklart kunna välja hur stor radie man vill söka på). Jag tror att det finns många som bor i
+	       närheten av en länsgräns som tycker det är ganska irriterande att vara tvugna att "dubbelsöka", först på sitt eget län
+	       och sedan det som man nästan befinner sig i.
+
+	       Det som Gratiskartan erbjuder till skillnad från Bortskänkes och andra liknande appar är att försöka samla allt som är
+	       gratis, inte bara det som privatpersoner skänker. Vet man att till exempel café Java här på campus erbjuder gratis kaffe
+	       så ska det komma upp på Gratiskartan, finns det något i naturen(frukt, bär, svamp) så ska det upp på Gratiskartan. 
 
 2. Fruktkartan (hemsida)
+   	       
 
 3. Bjussa.se (hemsida)
 

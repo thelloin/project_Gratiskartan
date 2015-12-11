@@ -17,13 +17,19 @@
         />
 
     <!-- Settings, should always be in the overflow -->
+    <!--
     <item
         android:id="@+id/action_settings"
         android:title="Settings"
         app:showAsAction="never" />
+        -->
     <item
         android:id="@+id/action_login"
         android:title="Log in/out"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_clear_search"
+        android:title="Rensa sökning"
         app:showAsAction="never" />
 
 </menu>

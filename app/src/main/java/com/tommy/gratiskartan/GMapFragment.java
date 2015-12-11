@@ -125,9 +125,17 @@ public class GMapFragment extends SupportMapFragment implements
 
         // BitmapDescriptorFactory.fromResource(R.drawable.ic_electronics_test))
 
-        // TODO Get user position with the class GPSTracker
+        double lat = 0.0;
+        double longi = 0.0;
+        GPSTracker gps = new GPSTracker(getActivity());
+        if (gps.canGetLocation()) {
+            lat = gps.getLatitude();
+            longi = gps.getLongitude();
+        } else {
+            gps.showSettingsAlert();
+        }
         // Move the camera
-        LatLng cameraPos = new LatLng(58.39858598, 15.57723999);
+        LatLng cameraPos = new LatLng(lat, longi); //new LatLng(58.39858598, 15.57723999);
         mMap.moveCamera(CameraUpdateFactory.zoomTo(13));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(cameraPos));
 
@@ -211,7 +219,7 @@ public class GMapFragment extends SupportMapFragment implements
         //mMarkerPosition = marker.getPosition();
     }
 
-    // For some reason this does not work, have to add this listener dirctly to mMap
+    // For some reason this does not work, have to add this listener directly to mMap
     @Override
     public void onCameraChange(CameraPosition position) {
         Toast.makeText(getActivity(), "Callback for camera change" , Toast.LENGTH_LONG).show();

@@ -111,7 +111,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
 
     /**
      * private method to toggle list and map fragment
-     * @param showMap
+     * @param showMap boolean
      */
     private void toggleFragment(boolean showMap) {
         if (showMap) {
@@ -173,6 +173,9 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
             Intent intent = new Intent(this, SearchActivity.class);
             startActivityForResult(intent, SEARCH_REQUEST);
             return true;
+        }
+        if (id == R.id.action_clear_search) {
+            new LoadItems().execute();
         }
 
         return super.onOptionsItemSelected(menuItem);
