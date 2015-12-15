@@ -7,3 +7,54 @@ produkt levererar. Men man behveör hitta conternuerliga betalegenskaper.
 Förbrukningsbara värden, prenumerationstjänster i relation till produkten.
 Betänk global konkurrens. Vad kommer andra att lätt kuna ge bort för att ta
 dina kunder.
+
+*** Gratiskartan ***
+
+Gratiskartan är tänkt att på ett så enkelt sätt som möjligt presentera för användaren allt som
+är gratis i dess närområde. Idag finns det på marknaden några aktörer som riktat in sig på en viss
+kategori där man kan skänka bort olika saker. Till exempel kan man på sidan bortskänkes.se
+skänka bort olika saker som finns i hemmet och på fruktkartan.se kan man tipsa om olika typer av
+frukter som finns i naturen.
+
+Det som skulle vara unikt med Gratiskartan är att man kombinerar alla dessa olika sidor och även
+tillför nya kategorier, jag tänker mig att man kan tipsa om saker som butiker erbjuder för att
+locka kunder, till exempel gratis matprov, godis, ansiktsmålning etc. Man skulle också kunna tänka
+sig att personer är villiga att ge av sin tid, att man ger bort någon typ av tjänst.
+
+Under utvecklingen har jag märkt av en tydlig konflikt: att hålla appen så enkel och användarvänlig
+som möjligt och att kombinera så många kategorier. Det finns en uppenbar risk att applikationen
+blir komplex och man får många specialfall beroende på vilken typ av objekt man vill lägga till
+på kartan.
+
+*** Affärsmodeller ***
+
+När jag bestämde mig för att det var denna appidé som jag ville utveckla hade jag inte någon
+speciell affärsmodell i åtanke utan det är något som jag funderat på under utvecklingens gång.
+
+Jag tror det är viktigt för denna typ av applikation att inte ha en freemiumvariant med begränsad
+funktionalitet, till exempel att man bara kan lägga upp annonser i vissa kategorier, och en premium
+variant med utökade funktioner. Detta för att appens framgång till största del beror på att så
+många som möjligt lägger upp annonser. Att då begränsa användarens möjligheter att lägga upp en
+annons skulle resultera i mindre antal annonser som ligger uppe vilket resulterar i mindre
+intresse för en användare att använda appen.
+
+Det bästa alternativet som jag ser det är ha riktad lokal annonsering integrerad som en naturlig
+del av appen. Dessa annonser skulle vara egna objekt på kartan som en användare kan interagera med
+som ett "vanligt objekt". 
+
+Att ha en premiumvariant av appen utan reklam skulle vara ett alternativ men för att detta skulle
+vara ett hållbart alternativ skulle appen vara tvungen att tillföra något mera av värde visar
+undersökningar.
+
+*** Nischning ***
+
+För denna app ser jag flera olika riktningar som man skulle kunna nischa sig. Denna app är ett
+försök att samla alla submarknader men det kan tänkas finnas utrymme för att särkjila dessa,
+en möjlig nischning skullle kunna vara en app som organiserar volontärarbete, alltså kategorin
+där man skänker bort sin tid.
+
+En app med bara reklamerbjudanden
+
+En app likt freelancer för tjänster i sitt närområde
+
+Premium-tjänst inte aktuellt - tappar för många användare
