@@ -6,3 +6,41 @@ Skiv ett stycke om vad du kan använda kunskapen i pappret till när du bygger
 appar. Bedöm trovärdigheten i källan. På vilket sätt är källa stark/svag som stöd i en argumentation.
 
 Använd korrekt format på referenser enligt någon standard.
+
+*** Sökord: freemium mobile apps ***
+
+########################################
+Första resultatet: An empirical study of the freemium strategy for mobile apps
+Citerat av 17
+Googlat pdf: http://aisel.aisnet.org/cgi/viewcontent.cgi?article=1050&context=icis2012
+########################################
+
+########################################
+Andra resultatet: Mobile applications and their delivery platforms
+Citerat av 36
+http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6028560
+########################################
+
+*** Sökord: business models mobile apps ***
+
+#######################################
+Fjärde resultatet: Challenges and business models for mobile location-based services and advertising
+Citerat av 175
+http://delivery.acm.org/10.1145/1950000/1941515/p121-dhar.pdf?ip=130.236.86.117&id=1941515&acc=ACTIVE%20SERVICE&key=74F7687761D7AE37%2EE60FE3557EC52CD4%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&CFID=568631923&CFTOKEN=70862257&__acm__=1450257615_ed0ba19f992cd09347ce7c3cbf13812f
+#######################################
+
+*** software user driven content ***
+
+#######################################
+Femte resultatet: A content-driven reputation system for the Wikipedia
+Citerat av: 394
+https://users.soe.ucsc.edu/~luca/papers/06/ucsc-crl-06-18.pdf
+#######################################
+
+*** license as a business model applications ***
+
+#######################################
+Andra resultatet: What is web 2.0: Design patterns and business models for the next generation of software
+Citerat av 9536
+https://mpra.ub.uni-muenchen.de/4578/1/MPRA_paper_4578.pdf
+#######################################
