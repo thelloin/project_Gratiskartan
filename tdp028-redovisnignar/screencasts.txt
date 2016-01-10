@@ -3,3 +3,8 @@ publikt ställe - antingen din egen dropbox eller youtube elelr vimeo ...
 
 2 stycken screencasts ska produceras. En som demar för användare och en
 som presenterar tekniken och implementeringen ur ett tekniskt perspektiv. 
+
+Länk till demon:
+https://www.youtube.com/watch?v=4CDTAli6VWo
+
+Tyvärr har jag stött på problem när jag ska spela in min kodgenomgång. Jag lyckas inte få till det på den här datorn som jag sitter på. Testar vidare och förhoppningsvis hinner jag få upp den i tid.

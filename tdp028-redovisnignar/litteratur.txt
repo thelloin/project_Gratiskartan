@@ -7,40 +7,97 @@ appar. Bedöm trovärdigheten i källan. På vilket sätt är källa stark/svag 
 
 Använd korrekt format på referenser enligt någon standard.
 
-*** Sökord: freemium mobile apps ***
 
-########################################
-Första resultatet: An empirical study of the freemium strategy for mobile apps
-Citerat av 17
+1. ########################################
+An empirical study of the freemium strategy for mobile apps
 Googlat pdf: http://aisel.aisnet.org/cgi/viewcontent.cgi?article=1050&context=icis2012
+
+I denna studie undersöks effekterna av freemium som affärsmodell på Google Play.
+Speciellt undersöks hur produktkvalité och försäljningsrank av applikationen påverkar
+intäkterna.
+Liu et al. (2012, 13) menar att genom att erbjuda användarna en gratisversion av en
+applikation bidrar detta till ökad försäljning och intäkter av betalversionen.
+En intressant observation från studien tyder på att applikationer med positiva
+användarrecensioner har större sannolikhet att generera ökade intäkter än applikationer
+med högre synlighet (Liu et al.). Av detta kan man anta att det till största del
+är produktens kvalité som avgör hur stor intäkterna kommer att bli.
+
+Trovärdigheten för denna studie skulle jag bedöma som relativt god.
+Författarna är anslutna till Universitet vid San Antonio, Texas, och har publicerat
+flertalet studier som ökar trovärdigheten. Dock är studien endast citerad 17 gånger,
+vilket inte är särskilt mycket men den är inte heller helt utan citat.
 ########################################
 
-########################################
-Andra resultatet: Mobile applications and their delivery platforms
-Citerat av 36
+2. ########################################
+Mobile applications and their delivery platforms
 http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6028560
+
+I denna rapport diskuteras olika typer av affärsmodeller för mobila applikationer
+och utvecklingen av dessa och framtiden för olika typer av leveransplattformar.
+I texten klassificeras applikationerna i olika kategorier, den typ av applikation som
+jag har utvecklat skulle hamna under kategorin serviceorienterad app. En möljig affärsmodell
+för denna typ av app som är B2C (Business to consumer) är freemium.
+Fokus för denna raport ligger ändå på utvecklingen av olika leveransplattformar för mobila
+applikationer. Det man kan dra lärdom om av denna rapport skulle kunna vara att man får ett
+bredare tänk, att inte bara ha Google Play som leveransplattform i åtanke utan att det kan komma
+andra plattformar snabbt in på marknaden som man kan använda sig av.
+
+Trovärdigheten skulle jag bedöma som god. Rapporten är publicerad av IEEE Computer Society,
+författarna har publicerat flera studier och den är citerad 36 gånger.
 ########################################
 
-*** Sökord: business models mobile apps ***
 
-#######################################
-Fjärde resultatet: Challenges and business models for mobile location-based services and advertising
-Citerat av 175
+3. #######################################
+Challenges and business models for mobile location-based services and advertising
 http://delivery.acm.org/10.1145/1950000/1941515/p121-dhar.pdf?ip=130.236.86.117&id=1941515&acc=ACTIVE%20SERVICE&key=74F7687761D7AE37%2EE60FE3557EC52CD4%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&CFID=568631923&CFTOKEN=70862257&__acm__=1450257615_ed0ba19f992cd09347ce7c3cbf13812f
+
+Dhar och Varshney tar i denna artikel upp tekniska och affärsrelaterade utmaningar kring plats-
+baserade tjänster, specifikt vid mobil annonsering. Det diskuteras även hur riktad annonsering
+kommer att kunna bestämmas genom att kombinera användarens position med användarspecifikt
+innehåll.
+Det som jag skulle kunna använda mig av från denna studie är hur och på vilka kriterier man ska
+välja ut de data från användaren för att ge hen den bästa möjliga reklamen. Det man vill uppnå
+är att reklamen ska kännas som en naturlig del av applikationen och inte som ett störande moment.
+Genom att kunna anpassa reklamen som visas för en specifik användare tror jag att det skulle kunna
+uppnås.
+
+Trovärdigheten skulle jag bedöma som god. Den är citerad 175 gånger, författarna är associerade med
+välkända Universitet i USA och artikeln är publicerad i Communications of the ACM.
 #######################################
 
-*** software user driven content ***
 
-#######################################
-Femte resultatet: A content-driven reputation system for the Wikipedia
-Citerat av: 394
+4. #######################################
+A content-driven reputation system for the Wikipedia
 https://users.soe.ucsc.edu/~luca/papers/06/ucsc-crl-06-18.pdf
+
+Denna studie presenterar ett system för att användare ska få ökat anseende på Wikipedia som är
+innhållsdrivet. Visst är det så att detta inte har så mycket med affärsmodeller att göra men jag
+tyckte ändå att det var en intressant med tanke på att man med detta system både kan öka kvalitén på
+innehållet i min app och även ge användare incitament att lägga upp gratisobjekt i min app. Det är
+dokumenterat att användare med högt anseende på Ebay har högre sannolikhet att sälja objekt till ett högre
+pris (Adler et al., 2006, 3).
+För att affärsmodellen ska hålla måste man locka användare till sig, det tror jag är möjligt med ett
+"ryktessystem".
+Detta "ryktessystem" skulle på något sätt vara baserat på att de gratisobjekt som en användare lägger upp
+faktiskt stämmer.
+
+Jag anser att trovärdighten för denna studie är hög. Studien är citerad 394 gånger, författarna är
+anslutna till University of California och studien innehåller trovärdiga referenser.
 #######################################
 
-*** license as a business model applications ***
 
-#######################################
-Andra resultatet: What is web 2.0: Design patterns and business models for the next generation of software
-Citerat av 9536
-https://mpra.ub.uni-muenchen.de/4578/1/MPRA_paper_4578.pdf
-#######################################
+5. #######################################
+When should software firms commercialize new products via freemium business models
+https://www.misrc.umn.edu/workshops/2011/fall/MariusFlorinNiculescu_2.pdf
+
+I denna studie undersöks och jämförs flera olika typer av affärsmodeller med varandra. Flera olika typer
+av freemium-affärsmodeller nämns. Det som är utmärkande för dagens mjukvara är att den till stor del är 
+uppbygd med en modulär arkitektur, Niculescu, Wu (2011, 3). Med denna arkitektur undersöks hur man på 
+bästa sätt kommersialiserar en produkt.
+Det intressanta i den här studien tycker jag är att man försöker utveckla ett ramverk som ska till hjälp
+när man som utvecklare ska avgöra var gränser går för vad som ska vara med i freemium- och premuimvarianten
+av sin applikation.
+
+Trovärdigheten för den här studien anser jag vara god. Den är dock bara citerad 22 gånger men författarna
+till studien har flera artiklar publicerade och studien innehåller trovärdiga referenser.
+########################################

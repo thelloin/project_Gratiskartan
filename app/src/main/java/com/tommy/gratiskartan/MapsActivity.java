@@ -103,7 +103,7 @@ public class MapsActivity extends AppCompatActivity implements  GMapFragment.OnF
                     toggleFragment(!toggleFab);
                 }
                 toggleFab = !toggleFab;
-                Toast.makeText(MapsActivity.this, "Clicked the fab", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MapsActivity.this, "Clicked the fab", Toast.LENGTH_LONG).show();
             }
         });
 

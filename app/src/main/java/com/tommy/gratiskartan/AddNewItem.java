@@ -44,7 +44,7 @@ public class AddNewItem extends AppCompatActivity {
         curLatitude = intent.getDoubleExtra(MapsActivity.CUR_LATITUDE_POS, 0);
         curLongitude = intent.getDoubleExtra(MapsActivity.CUR_LONGITUDE_POS, 0);
 
-        Toast.makeText(AddNewItem.this, curLatitude + " : " + curLongitude, Toast.LENGTH_LONG).show();
+        //Toast.makeText(AddNewItem.this, curLatitude + " : " + curLongitude, Toast.LENGTH_LONG).show();
         // Setting up and configure the toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.add_item_toolbar);
         setSupportActionBar(myToolbar);
