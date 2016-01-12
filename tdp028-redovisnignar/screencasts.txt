@@ -7,4 +7,8 @@ som presenterar tekniken och implementeringen ur ett tekniskt perspektiv.
 Länk till demon:
 https://www.youtube.com/watch?v=4CDTAli6VWo
 
-Tyvärr har jag stött på problem när jag ska spela in min kodgenomgång. Jag lyckas inte få till det på den här datorn som jag sitter på. Testar vidare och förhoppningsvis hinner jag få upp den i tid.
+Länk till kodgenomgång:
+Video 1/2:
+https://youtu.be/MdR_8Q5L4Tk
+Video 2/2:
+https://youtu.be/c52zCZ6DtFQ
